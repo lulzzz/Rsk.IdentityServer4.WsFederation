@@ -17,12 +17,12 @@ namespace IdentityServer4.WsFederation
 {
     public class WsFederationController : Controller
     {
-        private readonly IUserSession _sessionService;
-        private readonly SignInResponseGenerator _generator;
-        private readonly ILogger<WsFederationController> _logger;
-        private readonly MetadataResponseGenerator _metadata;
-        private readonly IdentityServerOptions _options;
-        private readonly SignInValidator _signinValidator;
+        private readonly IUserSession sessionService;
+        private readonly SignInResponseGenerator generator;
+        private readonly ILogger<WsFederationController> logger;
+        private readonly MetadataResponseGenerator metadata;
+        private readonly IdentityServerOptions options;
+        private readonly SignInValidator signinValidator;
 
         public WsFederationController(
             MetadataResponseGenerator metadata, 
@@ -32,13 +32,13 @@ namespace IdentityServer4.WsFederation
             IUserSession sessionService,
             ILogger<WsFederationController> logger)
         {
-            _metadata = metadata;
-            _signinValidator = signinValidator;
-            _options = options;
-            _generator = generator;
-            _sessionService = sessionService;
+            this.metadata = metadata;
+            this.signinValidator = signinValidator;
+            this.options = options;
+            this.generator = generator;
+            this.sessionService = sessionService;
 
-            _logger = logger;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -47,14 +47,14 @@ namespace IdentityServer4.WsFederation
             // GET + no parameters = metadata request
             if (!Request.QueryString.HasValue)
             {
-                _logger.LogDebug("Start WS-Federation metadata request");
+                logger.LogDebug("Start WS-Federation metadata request");
 
-                var entity = await _metadata.GenerateAsync(Url.Action("Index", "WsFederation", null, Request.Scheme, Request.Host.Value));
+                var entity = await metadata.GenerateAsync(Url.Action("Index", "WsFederation", null, Request.Scheme, Request.Host.Value));
                 return new MetadataResult(entity);
             }
             
             var url = Url.Action("Index", "WsFederation", null, Request.Scheme, Request.Host.Value) + Request.QueryString;
-            _logger.LogDebug("Start WS-Federation request: {url}", url);
+            logger.LogDebug("Start WS-Federation request: {url}", url);
 
             if (WSFederationMessage.TryCreateFromUri(new Uri(url), out WSFederationMessage message))
             {
@@ -77,15 +77,15 @@ namespace IdentityServer4.WsFederation
         {
             if (user.Identity.IsAuthenticated)
             {
-                _logger.LogDebug("User in WS-Federation signin request: {subjectId}", user.GetSubjectId());
+                logger.LogDebug("User in WS-Federation signin request: {subjectId}", user.GetSubjectId());
             }
             else
             {
-                _logger.LogDebug("No user present in WS-Federation signin request");
+                logger.LogDebug("No user present in WS-Federation signin request");
             }
 
             // validate request
-            var result = await _signinValidator.ValidateAsync(signin, user);
+            var result = await signinValidator.ValidateAsync(signin, user);
 
             if (result.IsError)
             {
@@ -97,16 +97,16 @@ namespace IdentityServer4.WsFederation
                 var returnUrl = Url.Action("Index");
                 returnUrl = returnUrl.AddQueryString(Request.QueryString.Value);
 
-                var loginUrl = _options.UserInteraction.LoginUrl;
-                var url = loginUrl.AddQueryString(_options.UserInteraction.LoginReturnUrlParameter, returnUrl);
+                var loginUrl = options.UserInteraction.LoginUrl;
+                var url = loginUrl.AddQueryString(options.UserInteraction.LoginReturnUrlParameter, returnUrl);
 
                 return Redirect(url);
             }
             else
             {
                 // create protocol response
-                var responseMessage = await _generator.GenerateResponseAsync(result);
-                await _sessionService.AddClientIdAsync(result.Client.ClientId);
+                var responseMessage = await generator.GenerateResponseAsync(result);
+                await sessionService.AddClientIdAsync(result.Client.ClientId);
                 
                 return new SignInResult(responseMessage);
             }

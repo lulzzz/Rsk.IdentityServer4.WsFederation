@@ -17,24 +17,24 @@ namespace IdentityServer4.WsFederation
 {
     public class MetadataResponseGenerator
     {
-        private readonly IKeyMaterialService _keys;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IKeyMaterialService keys;
+        private readonly IHttpContextAccessor contextAccessor;
 
         public MetadataResponseGenerator(IHttpContextAccessor contextAccessor, IKeyMaterialService keys)
         {
-            _keys = keys;
-            _contextAccessor = contextAccessor;
+            this.keys = keys;
+            this.contextAccessor = contextAccessor;
         }
 
         public async Task<EntityDescriptor> GenerateAsync(string wsfedEndpoint)
         {
-            var signingKey = (await _keys.GetSigningCredentialsAsync()).Key as X509SecurityKey;
+            var signingKey = (await keys.GetSigningCredentialsAsync()).Key as X509SecurityKey;
             var cert = signingKey.Certificate;
 
             var applicationDescriptor = GetApplicationDescriptor(wsfedEndpoint, cert);
             var tokenServiceDescriptor = GetTokenServiceDescriptor(wsfedEndpoint, cert);
 
-            var id = new EntityId(_contextAccessor.HttpContext.GetIdentityServerIssuerUri());
+            var id = new EntityId(contextAccessor.HttpContext.GetIdentityServerIssuerUri());
             var entity = new EntityDescriptor(id);
 
             entity.SigningCredentials = new X509SigningCredentials(cert);

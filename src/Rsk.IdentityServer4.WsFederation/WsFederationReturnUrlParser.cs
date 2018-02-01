@@ -17,18 +17,18 @@ namespace IdentityServer4.WsFederation
 {
     public class WsFederationReturnUrlParser : IReturnUrlParser
     {
-        private readonly IHttpContextAccessor _contextAccessor;
-        private readonly ILogger<WsFederationReturnUrlParser> _logger;
-        private readonly SignInValidator _signinValidator;
+        private readonly IHttpContextAccessor contextAccessor;
+        private readonly ILogger<WsFederationReturnUrlParser> logger;
+        private readonly SignInValidator signinValidator;
 
         public WsFederationReturnUrlParser(
             IHttpContextAccessor contextAccessor,
             SignInValidator signinValidator,
             ILogger<WsFederationReturnUrlParser> logger)
         {
-            _contextAccessor = contextAccessor;
-            _signinValidator = signinValidator;
-            _logger = logger;
+            this.contextAccessor = contextAccessor;
+            this.signinValidator = signinValidator;
+            this.logger = logger;
         }
 
         public bool IsValidReturnUrl(string returnUrl)
@@ -38,7 +38,7 @@ namespace IdentityServer4.WsFederation
                 var message = GetSignInRequestMessage(returnUrl);
                 if (message != null) return true;
 
-                _logger.LogTrace("not a valid WS-Federation return URL");
+                logger.LogTrace("not a valid WS-Federation return URL");
                 return false;                
             }
 
@@ -47,13 +47,13 @@ namespace IdentityServer4.WsFederation
 
         public async Task<AuthorizationRequest> ParseAsync(string returnUrl)
         {
-            var user = _contextAccessor.HttpContext.User;
+            var user = contextAccessor.HttpContext.User;
 
             var signInMessage = GetSignInRequestMessage(returnUrl);
             if (signInMessage == null) return null;
 
             // call validator
-            var result = await _signinValidator.ValidateAsync(signInMessage, user);
+            var result = await signinValidator.ValidateAsync(signInMessage, user);
             if (result.IsError) return null;
 
             // populate request

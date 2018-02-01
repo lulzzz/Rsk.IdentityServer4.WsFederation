@@ -10,16 +10,16 @@ namespace IdentityServer4.WsFederation.Stores
 {
     public class InMemoryRelyingPartyStore : IRelyingPartyStore
     {
-        private IEnumerable<RelyingParty> _relyingParties;
+        private readonly IEnumerable<RelyingParty> relyingParties;
 
         public InMemoryRelyingPartyStore(IEnumerable<RelyingParty> relyingParties)
         {
-            _relyingParties = relyingParties;
+            this.relyingParties = relyingParties;
         }
 
         public Task<RelyingParty> FindRelyingPartyByRealm(string realm)
         {
-            return Task.FromResult(_relyingParties.FirstOrDefault(r => r.Realm == realm));
+            return Task.FromResult(relyingParties.FirstOrDefault(r => r.Realm == realm));
         }
     }
 }

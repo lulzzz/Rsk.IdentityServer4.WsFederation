@@ -14,15 +14,15 @@ namespace IdentityServer4.WsFederation.Validation
 {
     public class SignInValidator
     {
-        private readonly IClientStore _clients;
-        private readonly IRelyingPartyStore _relyingParties;
-        private readonly WsFederationOptions _options;
+        private readonly IClientStore clients;
+        private readonly IRelyingPartyStore relyingParties;
+        private readonly WsFederationOptions options;
 
         public SignInValidator(WsFederationOptions options, IClientStore clients, IRelyingPartyStore relyingParties)
         {
-            _options = options;
-            _clients = clients;
-            _relyingParties = relyingParties;
+            this.options = options;
+            this.clients = clients;
+            this.relyingParties = relyingParties;
         }
 
         public async Task<SignInValidationResult> ValidateAsync(SignInRequestMessage message, ClaimsPrincipal user)
@@ -34,7 +34,7 @@ namespace IdentityServer4.WsFederation.Validation
             };
             
             // check client
-            var client = await _clients.FindEnabledClientByIdAsync(message.Realm);
+            var client = await clients.FindEnabledClientByIdAsync(message.Realm);
 
             if (client == null)
             {
@@ -59,16 +59,16 @@ namespace IdentityServer4.WsFederation.Validation
             result.ReplyUrl = client.RedirectUris.First();
 
             // check if additional relying party settings exist
-            var rp = await _relyingParties.FindRelyingPartyByRealm(message.Realm);
+            var rp = await relyingParties.FindRelyingPartyByRealm(message.Realm);
             if (rp == null)
             {
                 rp = new RelyingParty
                 {
-                    TokenType = _options.DefaultTokenType,
-                    SignatureAlgorithm = _options.DefaultSignatureAlgorithm,
-                    DigestAlgorithm = _options.DefaultDigestAlgorithm,
-                    SamlNameIdentifierFormat = _options.DefaultSamlNameIdentifierFormat,
-                    ClaimMapping = _options.DefaultClaimMapping
+                    TokenType = options.DefaultTokenType,
+                    SignatureAlgorithm = options.DefaultSignatureAlgorithm,
+                    DigestAlgorithm = options.DefaultDigestAlgorithm,
+                    SamlNameIdentifierFormat = options.DefaultSamlNameIdentifierFormat,
+                    ClaimMapping = options.DefaultClaimMapping
                 };
             }
 

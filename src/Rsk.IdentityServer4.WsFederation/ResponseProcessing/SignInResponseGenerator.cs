@@ -25,12 +25,12 @@ namespace IdentityServer4.WsFederation
 {
     public class SignInResponseGenerator
     {
-        private readonly IdentityServerOptions _options;
-        private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IProfileService _profile;
-        private readonly IKeyMaterialService _keys;
-        private readonly IResourceStore _resources;
-        private readonly ILogger<SignInResponseGenerator> _logger;
+        private readonly IdentityServerOptions options;
+        private readonly IHttpContextAccessor contextAccessor;
+        private readonly IProfileService profile;
+        private readonly IKeyMaterialService keys;
+        private readonly IResourceStore resources;
+        private readonly ILogger<SignInResponseGenerator> logger;
 
         public SignInResponseGenerator(
             IHttpContextAccessor contextAccessor, 
@@ -40,17 +40,17 @@ namespace IdentityServer4.WsFederation
             IResourceStore resources,
             ILogger<SignInResponseGenerator> logger)
         {
-            _contextAccessor = contextAccessor;
-            _options = options;
-            _profile = profile;
-            _keys = keys;
-            _resources = resources;
-            _logger = logger;
+            this.contextAccessor = contextAccessor;
+            this.options = options;
+            this.profile = profile;
+            this.keys = keys;
+            this.resources = resources;
+            this.logger = logger;
         }
 
         public async Task<SignInResponseMessage> GenerateResponseAsync(SignInValidationResult validationResult)
         {
-            _logger.LogDebug("Creating WS-Federation signin response");
+            logger.LogDebug("Creating WS-Federation signin response");
 
             // create subject
             var outgoingSubject = await CreateSubjectAsync(validationResult);
@@ -66,7 +66,7 @@ namespace IdentityServer4.WsFederation
         {
             var requestedClaimTypes = new List<string>();
 
-            var resources = await _resources.FindEnabledIdentityResourcesByScopeAsync(result.Client.AllowedScopes);
+            var resources = await this.resources.FindEnabledIdentityResourcesByScopeAsync(result.Client.AllowedScopes);
             foreach (var resource in resources)
             {
                 foreach (var claim in resource.UserClaims)
@@ -83,7 +83,7 @@ namespace IdentityServer4.WsFederation
                 Caller = "WS-Federation"
             };
 
-            await _profile.GetProfileDataAsync(ctx);
+            await profile.GetProfileDataAsync(ctx);
             
             // map outbound claims
             var nameid = new Claim(ClaimTypes.NameIdentifier, result.User.GetSubjectId());
@@ -108,7 +108,7 @@ namespace IdentityServer4.WsFederation
                 }
                 else
                 {
-                    _logger.LogInformation("No explicit claim type mapping for {claimType} configured. Saml11 requires a URI claim type. Skipping.", claim.Type);
+                    logger.LogInformation("No explicit claim type mapping for {claimType} configured. Saml11 requires a URI claim type. Skipping.", claim.Type);
                 }
             }
 
@@ -135,7 +135,7 @@ namespace IdentityServer4.WsFederation
 
         private async Task<SecurityToken> CreateSecurityTokenAsync(SignInValidationResult result, ClaimsIdentity outgoingSubject)
         {
-            var credential = await _keys.GetSigningCredentialsAsync();
+            var credential = await keys.GetSigningCredentialsAsync();
             var key = credential.Key as Microsoft.IdentityModel.Tokens.X509SecurityKey; 
         
             var descriptor = new SecurityTokenDescriptor
@@ -145,7 +145,7 @@ namespace IdentityServer4.WsFederation
                 ReplyToAddress = result.Client.RedirectUris.First(),
                 SigningCredentials = new X509SigningCredentials(key.Certificate, result.RelyingParty.SignatureAlgorithm, result.RelyingParty.DigestAlgorithm),
                 Subject = outgoingSubject,
-                TokenIssuerName = _contextAccessor.HttpContext.GetIdentityServerIssuerUri(),
+                TokenIssuerName = contextAccessor.HttpContext.GetIdentityServerIssuerUri(),
                 TokenType = result.RelyingParty.TokenType
             };
 
