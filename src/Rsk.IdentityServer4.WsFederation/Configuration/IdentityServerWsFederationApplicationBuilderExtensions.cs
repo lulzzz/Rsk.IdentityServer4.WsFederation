@@ -12,7 +12,7 @@ namespace Rsk.IdentityServer4.WsFederation.Configuration
 {
     public static class IdentityServerWsFederationApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseIdentityServerSamlPlugin(this IApplicationBuilder app)
+        public static IApplicationBuilder UseIdentityServerWsFederationPlugin(this IApplicationBuilder app)
         {
             app.Validate();
 
@@ -26,7 +26,7 @@ namespace Rsk.IdentityServer4.WsFederation.Configuration
             var loggerFactory = app.ApplicationServices.GetService(typeof(ILoggerFactory)) as ILoggerFactory;
             if (loggerFactory == null) throw new ArgumentNullException(nameof(loggerFactory));
 
-            var logger = loggerFactory.CreateLogger("IdentityServer4.Saml.Startup");
+            var logger = loggerFactory.CreateLogger("Rsk.IdentityServer4.WsFederation.Startup");
 
             var scopeFactory = app.ApplicationServices.GetService<IServiceScopeFactory>();
 
@@ -37,7 +37,7 @@ namespace Rsk.IdentityServer4.WsFederation.Configuration
                 var store = serviceProvider.GetService<IRelyingPartyStore>();
                 if (store == null)
                 {
-                    const string error = "No storage mechanism for SAML service providers specified. Use the 'AddInMemoryServiceProviders' extension method to register a development version.";
+                    const string error = "No storage mechanism for WS-Federation relying parties specified. Use the 'AddInMemoryRelyingParties' extension method to register a development version.";
                     logger.LogCritical(error);
                     throw new InvalidOperationException(error);
                 }

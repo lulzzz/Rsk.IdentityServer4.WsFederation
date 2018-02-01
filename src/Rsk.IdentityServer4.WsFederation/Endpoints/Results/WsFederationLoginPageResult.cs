@@ -37,7 +37,7 @@ namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
             Init(context);
 
             var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() +
-                            wsFedOptions.SamlEndpoint.EnsureTrailingSlash();
+                            wsFedOptions.WsFederationEndpoint.EnsureTrailingSlash();
             returnUrl = returnUrl.AddQueryString("requestId", requestId);
 
             var loginUrl = options.UserInteraction.LoginUrl;

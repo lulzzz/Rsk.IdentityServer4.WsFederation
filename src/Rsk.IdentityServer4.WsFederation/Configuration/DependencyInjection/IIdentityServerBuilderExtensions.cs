@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var endpointPathToNameMap = new Dictionary<string, WsFederationEndpointName>
             {
-                {options.SamlEndpoint.EnsureTrailingSlash(), WsFederationEndpointName.WsFed}
+                {options.WsFederationEndpoint.EnsureTrailingSlash(), WsFederationEndpointName.WsFed}
             };
 
             builder.Services.AddSingleton<IWsFederationEndpointRouter>(resolver =>
