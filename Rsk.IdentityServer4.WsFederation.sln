@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{54D98041-C6CE-4487-AC2B-3C44C6FF14D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rsk.IdentityServer4.WsFederation", "src\Rsk.IdentityServer4.WsFederation\Rsk.IdentityServer4.WsFederation.csproj", "{BA230C51-500F-4E00-9F92-522E1AA97727}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA230C51-500F-4E00-9F92-522E1AA97727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA230C51-500F-4E00-9F92-522E1AA97727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA230C51-500F-4E00-9F92-522E1AA97727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA230C51-500F-4E00-9F92-522E1AA97727}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA230C51-500F-4E00-9F92-522E1AA97727} = {54D98041-C6CE-4487-AC2B-3C44C6FF14D4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {917E525C-4ED5-4E03-AB25-E56F9469C4EB}
+	EndGlobalSection
+EndGlobal
