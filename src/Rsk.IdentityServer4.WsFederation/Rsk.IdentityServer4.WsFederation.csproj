@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <PackageId>Rsk.IdentityServer4.WsFederation</PackageId>
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <Authors>Rock Solid Knowldge Ltd;Scott Brady;Brock Allen;Dominick Baier</Authors>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,12 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityModel;
-using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.Security.Claims;
+using IdentityModel;
+using IdentityServer4.WsFederation;
+using Microsoft.IdentityModel.Tokens;
 
-namespace IdentityServer4.WsFederation
+namespace Rsk.IdentityServer4.WsFederation.Configuration
 {
     public class WsFederationOptions
     {

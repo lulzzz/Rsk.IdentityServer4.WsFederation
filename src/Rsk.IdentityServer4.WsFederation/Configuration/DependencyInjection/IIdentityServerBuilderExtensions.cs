@@ -1,7 +1,5 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
+﻿using System;
+using System.Collections.Generic;
 using IdentityServer4.Services;
 using IdentityServer4.WsFederation;
 using IdentityServer4.WsFederation.Stores;
@@ -9,12 +7,11 @@ using IdentityServer4.WsFederation.Validation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class WsFederationBuilderExtensions
+    public static class IIdentityServerBuilderExtensions
     {
         public static IIdentityServerBuilder AddWsFederation(this IIdentityServerBuilder builder)
         {
@@ -49,5 +46,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return builder;
         }
+
     }
 }

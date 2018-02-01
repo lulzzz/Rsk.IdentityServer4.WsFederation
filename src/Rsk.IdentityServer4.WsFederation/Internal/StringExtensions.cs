@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
+﻿using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 
 namespace IdentityServer4.Extensions

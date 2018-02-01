@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.WsFederation.Stores;
+using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace IdentityServer4.WsFederation.Validation
 {
