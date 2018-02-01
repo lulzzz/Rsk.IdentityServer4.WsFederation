@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IdentityModel.Tokens;
 using System.Threading.Tasks;
 using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
@@ -38,8 +37,7 @@ namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
             Init(context);
 
             var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() +
-                            wsFedOptions.SamlEndpoint.EnsureTrailingSlash() +
-                            SamlConstants.ProtocolRoutePaths.Saml2SingleSignOnAfterLogin;
+                            wsFedOptions.SamlEndpoint.EnsureTrailingSlash();
             returnUrl = returnUrl.AddQueryString("requestId", requestId);
 
             var loginUrl = options.UserInteraction.LoginUrl;
