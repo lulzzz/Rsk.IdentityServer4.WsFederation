@@ -11,13 +11,13 @@ namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
 {
     internal class WsFederationLoginPageResult : IEndpointResult
     {
-        private readonly string requestId;
+        private readonly string request;
         private IdentityServerOptions options;
         private WsFederationOptions wsFedOptions;
 
-        public WsFederationLoginPageResult(string requestId)
+        public WsFederationLoginPageResult(string request)
         {
-            this.requestId = requestId ?? throw new ArgumentNullException(nameof(requestId));
+            this.request = request ?? throw new ArgumentNullException(nameof(request));
         }
 
         internal WsFederationLoginPageResult(string returnId, IdentityServerOptions options, WsFederationOptions wsFedOptions) : this(returnId)
@@ -36,9 +36,9 @@ namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
         {
             Init(context);
 
-            var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() +
-                            wsFedOptions.WsFederationEndpoint.EnsureTrailingSlash();
-            returnUrl = returnUrl.AddQueryString("requestId", requestId);
+            var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() 
+                            + wsFedOptions.WsFederationEndpoint.RemoveTrailingSlash()
+                            + request;
 
             var loginUrl = options.UserInteraction.LoginUrl;
             if (!loginUrl.IsLocalUrl())

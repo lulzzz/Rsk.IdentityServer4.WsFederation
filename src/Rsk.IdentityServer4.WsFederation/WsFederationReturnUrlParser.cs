@@ -2,18 +2,18 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4.Services;
 using System;
-using System.Threading.Tasks;
-using IdentityServer4.Models;
-using IdentityServer4.Extensions;
-using Microsoft.Extensions.Logging;
-using IdentityServer4.WsFederation.Validation;
-using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Services;
 using System.Net;
+using System.Threading.Tasks;
+using IdentityServer4.Extensions;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using IdentityServer4.WsFederation.Validation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-namespace IdentityServer4.WsFederation
+namespace Rsk.IdentityServer4.WsFederation
 {
     public class WsFederationReturnUrlParser : IReturnUrlParser
     {

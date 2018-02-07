@@ -12,7 +12,7 @@ namespace Rsk.IdentityServer4.WsFederation.Configuration
 {
     public class WsFederationOptions
     {
-        public string WsFederationEndpoint { get; set; } = "wsfed";
+        public string WsFederationEndpoint { get; set; } = "wsfederation";
 
         public string DefaultTokenType { get; set; } = WsFederationConstants.TokenTypes.Saml2TokenProfile11;
         public string DefaultDigestAlgorithm { get; set; } = SecurityAlgorithms.Sha256Digest;

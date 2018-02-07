@@ -74,6 +74,13 @@ namespace IdentityServer4.WsFederation.Validation
 
             result.RelyingParty = rp;
 
+            // assign defaults for unconfigured properties
+            if (result.RelyingParty.TokenType == null) result.RelyingParty.TokenType = options.DefaultTokenType;
+            if (result.RelyingParty.SignatureAlgorithm == null) result.RelyingParty.SignatureAlgorithm = options.DefaultSignatureAlgorithm;
+            if (result.RelyingParty.DigestAlgorithm == null) result.RelyingParty.DigestAlgorithm = options.DefaultDigestAlgorithm;
+            if (result.RelyingParty.SamlNameIdentifierFormat == null) result.RelyingParty.SamlNameIdentifierFormat = options.DefaultSamlNameIdentifierFormat;
+            if (result.RelyingParty.ClaimMapping?.Any() != true) result.RelyingParty.ClaimMapping = options.DefaultClaimMapping;
+
             if (user == null ||
                 user.Identity.IsAuthenticated == false)
             {

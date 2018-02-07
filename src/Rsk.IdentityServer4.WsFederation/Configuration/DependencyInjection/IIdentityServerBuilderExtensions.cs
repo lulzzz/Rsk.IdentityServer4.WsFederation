@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Rsk.IdentityServer4.WsFederation;
 using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -25,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var endpointPathToNameMap = new Dictionary<string, WsFederationEndpointName>
             {
-                {options.WsFederationEndpoint.EnsureTrailingSlash(), WsFederationEndpointName.WsFed}
+                {options.WsFederationEndpoint, WsFederationEndpointName.WsFed}
             };
 
             builder.Services.AddSingleton<IWsFederationEndpointRouter>(resolver =>
