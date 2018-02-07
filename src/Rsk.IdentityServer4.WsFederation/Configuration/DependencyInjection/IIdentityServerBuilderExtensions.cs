@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using IdentityServer4.Extensions;
 using IdentityServer4.Hosting;
 using IdentityServer4.Services;
 using IdentityServer4.WsFederation;
+using IdentityServer4.WsFederation.Configuration;
 using IdentityServer4.WsFederation.Hosting;
 using IdentityServer4.WsFederation.Stores;
 using IdentityServer4.WsFederation.Validation;
@@ -11,8 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Rsk.IdentityServer4.WsFederation;
-using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

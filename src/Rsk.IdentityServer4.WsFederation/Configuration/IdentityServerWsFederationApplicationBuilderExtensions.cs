@@ -3,12 +3,11 @@ using System.Security.Cryptography;
 using IdentityServer4.Services;
 using IdentityServer4.WsFederation.Hosting;
 using IdentityServer4.WsFederation.Stores;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Rsk.IdentityServer4.WsFederation.Configuration
+namespace Microsoft.AspNetCore.Builder
 {
     public static class IdentityServerWsFederationApplicationBuilderExtensions
     {

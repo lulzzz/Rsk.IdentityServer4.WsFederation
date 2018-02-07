@@ -13,7 +13,7 @@ using IdentityServer4.WsFederation.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Rsk.IdentityServer4.WsFederation
+namespace IdentityServer4.WsFederation
 {
     public class WsFederationReturnUrlParser : IReturnUrlParser
     {

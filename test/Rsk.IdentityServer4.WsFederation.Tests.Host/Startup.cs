@@ -10,7 +10,6 @@ using IdentityServer4.WsFederation.Stores;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace Rsk.IdentityServer4.WsFederation.Tests.Host
 {

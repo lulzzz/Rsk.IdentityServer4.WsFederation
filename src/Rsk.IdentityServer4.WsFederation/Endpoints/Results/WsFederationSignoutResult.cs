@@ -5,7 +5,7 @@ using IdentityServer4.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
+namespace IdentityServer4.WsFederation.Endpoints.Results
 {
     public class WsFederationSignoutResult : IEndpointResult
     {

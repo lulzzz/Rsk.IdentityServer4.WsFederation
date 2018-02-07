@@ -6,7 +6,7 @@ using System.Xml;
 using IdentityServer4.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
+namespace IdentityServer4.WsFederation.Endpoints.Results
 {
     public class MetadataResult : IEndpointResult
     {

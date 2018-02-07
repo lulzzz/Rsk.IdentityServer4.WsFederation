@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
 using IdentityServer4.Hosting;
+using IdentityServer4.WsFederation.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Rsk.IdentityServer4.WsFederation.Configuration;
 
 namespace Rsk.IdentityServer4.WsFederation.Endpoints.Results
 {

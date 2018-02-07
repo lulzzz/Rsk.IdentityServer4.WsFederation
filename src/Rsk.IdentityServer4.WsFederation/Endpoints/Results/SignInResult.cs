@@ -3,7 +3,7 @@ using System.IdentityModel.Services;
 using System.Threading.Tasks;
 using IdentityServer4.Hosting;
 
-namespace IdentityServer4.WsFederation
+namespace IdentityServer4.WsFederation.Endpoints.Results
 {
     public class SignInResult : IEndpointResult
     {

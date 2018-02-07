@@ -5,10 +5,9 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using IdentityModel;
-using IdentityServer4.WsFederation;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Rsk.IdentityServer4.WsFederation.Configuration
+namespace IdentityServer4.WsFederation.Configuration
 {
     public class WsFederationOptions
     {
